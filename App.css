@@ -1,0 +1,22 @@
+.App {
+  height: 100vh;
+  text-align: center;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+form {
+  flex-direction: column;
+}
