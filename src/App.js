@@ -1,32 +1,52 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Modal, Button } from "react-bootstrap";
 
 function App() {
   const [parking, setParking] = useState(5);
-  const [licensePlate, setLicensePlate] = useState("");
   const [parkSpaces, setParkSpaces] = useState([]);
+  const [show, setShow] = useState(false);
+  const [exist, setExist] = useState(false);
+  const inputRef = useRef();
+  const finalTimeRef = useRef(0);
+
+  const handleClose = () => setShow(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setParkSpaces((current) => [...current, licensePlate.toUpperCase()]);
+    const parkTime = new Date().getTime();
+
+    parkSpaces.forEach((element) => {
+      if (element.plateNumber === inputRef.current.value.toUpperCase()) {
+        alert("This car already exists!");
+      }
+    });
+
+    setParkSpaces((current) => [
+      ...current,
+      { plateNumber: inputRef.current.value.toUpperCase(), time: parkTime },
+    ]);
     setParking((current) => current - 1);
   };
 
-  const handleChange = (event) => {
-    // event.persist();
-    setLicensePlate(event);
-  };
-
   const handleClick = () => {
-    const array = new Array(parkSpaces);
-    console.log(array);
+    const array = [...parkSpaces];
+
     for (let i = 0; i < array.length; i++) {
-      if (licensePlate.toUpperCase() === array[i]) {
+      if (inputRef.current.value.toUpperCase() === array[i].plateNumber) {
+        let totalTime = Math.floor(
+          (new Date("2021-06-31").getTime() - array[i].time) / 1000
+        );
+
+        finalTimeRef.current = Math.round(totalTime / 60);
+
         array.splice(i, 1);
+        setParking((current) => current + 1);
+        setShow(true);
       }
     }
-    console.log(array);
+    return setParkSpaces([...array]);
   };
 
   return (
@@ -36,7 +56,7 @@ function App() {
         <h2>Currently occupied parking spaces:</h2>
         <ol>
           {parkSpaces.map((e, index) => (
-            <li key={index}>{e}</li>
+            <li key={index}>Car number: {e.plateNumber}</li>
           ))}
         </ol>
 
@@ -44,12 +64,7 @@ function App() {
           <div>
             <label htmlFor='park'>Enter your license plate number</label>
             <br />
-            <input
-              id='park'
-              type='text'
-              value={licensePlate}
-              onChange={(e) => handleChange(e.target.value)}
-            />
+            <input id='park' type='text' ref={inputRef} />
           </div>
 
           <div>
@@ -59,6 +74,7 @@ function App() {
               className='btn btn-primary'
               value='Enter parking'
             />
+            {parking === 0 && <span role='alert'>The parking is full!</span>}
           </div>
 
           <div>
@@ -70,9 +86,31 @@ function App() {
               onClick={handleClick}
             />
           </div>
-          <p role='alert'>{parking === 0 && "The parking is full!"}</p>
         </form>
       </section>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Parking summary</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {`Your parking time was ${Math.ceil(finalTimeRef.current / 60)} ${
+            Math.ceil(finalTimeRef.current / 60) > 1 ? "hours," : "hour,"
+          } 
+            and a total of ${
+              10 + Math.floor(finalTimeRef.current / 60) * 5
+            } RON must be paid.
+          `}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='secondary' onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant='primary' onClick={handleClose}>
+            Proceed to payment
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
