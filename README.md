@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Pay Parking
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In contextul unei parcari cu plata, care opereaza urmatoarele tarife (10 lei prima ora de
+stationare, 5 lei fiecare ora ulterioara), cu capacitatea maxima de 10 locuri de parcare, avem
+nevoie de un sistem de gestiune a activitatii. Stationarea se rotunjeste prin adaugare la cea mai
+apropiata ora (ex. 10 min stationate se tarifeaza o ora; 1h 1m se tarifeaza 2h)
 
-## Available Scripts
+- Orice client poate vedea numarul de locuri disponibile
+- La intrarea unei masini noi in parcare, sistemul parcarii inregistreaza numarul de
+  inmatriculare al masinii
+- La iesirea din parcare a unei masini, sistemul parcarii emite un sumar, in functie de
+  durata stationarii. In rezolvarea acestui punct, ce informatii consideri ca ar fi esentiale ca
+  parte a sumarului?
+- Orice client poate interoga lista de masini stationate in parcare la un moment dat
 
-In the project directory, you can run:
+  #### Cerinte tehnice
 
-### `npm start`
+- Implementarea se va realiza folosind JavaScript ori TypeScript, toate datele fiind stocate
+  in memorie, nefiind nevoie de stocarea permanenta nicaieri
+- Scrierea unui cod cat mai curat si usor de inteles
+- Realizarea unei interfete grafice simple care sa permita citirea datelor de la tastatura si
+  afisarea lor in aceeasi pagina
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Live Application URL
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The Application is deployed in https://pay-parking.pages.dev/#/
 
-### `npm test`
+Click on the link to see the application
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Cloning and Running the Application in local
 
-### `npm run build`
+Clone the project into local
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install all the npm packages. Go into the project folder and type the following command to install all npm packages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+In order to run the application Type the following command
 
-### `npm run eject`
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The Application Runs on **localhost:3000**
