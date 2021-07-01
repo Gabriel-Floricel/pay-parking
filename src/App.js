@@ -16,11 +16,11 @@ function App() {
     event.preventDefault();
     const parkTime = new Date().getTime();
 
-    parkSpaces.forEach((element) => {
-      if (element.plateNumber === inputRef.current.value.toUpperCase()) {
-        alert("This car already exists!");
+    for (const space of parkSpaces) {
+      if (space.plateNumber === inputRef.current.value.toUpperCase()) {
+        return alert("This car already exists!");
       }
-    });
+    }
 
     setParkSpaces((current) => [
       ...current,
@@ -35,7 +35,7 @@ function App() {
     for (let i = 0; i < array.length; i++) {
       if (inputRef.current.value.toUpperCase() === array[i].plateNumber) {
         let totalTime = Math.floor(
-          (new Date("2021-06-31").getTime() - array[i].time) / 1000
+          (new Date("2021-07-02").getTime() - array[i].time) / 1000
         );
 
         finalTimeRef.current = Math.round(totalTime / 60);
@@ -58,7 +58,11 @@ function App() {
       }}>
       <section className='main'>
         <h1>Parking spaces available: {parking} </h1>
-        <h2>Currently occupied parking spaces:</h2>
+        <h2>
+          {parkSpaces.length === 5
+            ? "The parking is full!"
+            : " Currently occupied parking spaces:"}
+        </h2>
         <div className='Cards'>
           {parkSpaces.map((e, index) => (
             <Card
@@ -90,7 +94,6 @@ function App() {
               className='btn btn-primary col p-2 m-2'
               value='Enter parking'
             />
-            {parking === 0 && <p role='alert'>The parking is full!</p>}
 
             <input
               type='button'
