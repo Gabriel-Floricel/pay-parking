@@ -1,13 +1,12 @@
 import { useState, useRef } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Card } from "react-bootstrap";
 
 function App() {
   const [parking, setParking] = useState(5);
   const [parkSpaces, setParkSpaces] = useState([]);
   const [show, setShow] = useState(false);
-  const [exist, setExist] = useState(false);
   const inputRef = useRef();
   const finalTimeRef = useRef(0);
 
@@ -50,37 +49,52 @@ function App() {
   };
 
   return (
-    <div>
+    <div
+      className='App'
+      style={{
+        backgroundImage: "url(./parking.jpg)",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}>
       <section className='main'>
         <h1>Parking spaces available: {parking} </h1>
         <h2>Currently occupied parking spaces:</h2>
-        <ol>
+        <div className='Cards'>
           {parkSpaces.map((e, index) => (
-            <li key={index}>Car number: {e.plateNumber}</li>
+            <Card
+              bg='secondary'
+              text='light'
+              style={{ width: "18rem" }}
+              className='mb-2 ms-2'>
+              <Card.Header>Car {index + 1}</Card.Header>
+              <Card.Body>
+                <Card.Title> {e.plateNumber} </Card.Title>
+              </Card.Body>
+            </Card>
           ))}
-        </ol>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor='park'>Enter your license plate number</label>
+            <label htmlFor='park' className='text-white'>
+              Enter your license plate number
+            </label>
             <br />
-            <input id='park' type='text' ref={inputRef} />
+            <input id='park' type='text' ref={inputRef} className='p-2 m-2' />
           </div>
 
-          <div>
+          <div className='row'>
             <input
               disabled={parking === 0}
               type='submit'
-              className='btn btn-primary'
+              className='btn btn-primary col p-2 m-2'
               value='Enter parking'
             />
-            {parking === 0 && <span role='alert'>The parking is full!</span>}
-          </div>
+            {parking === 0 && <p role='alert'>The parking is full!</p>}
 
-          <div>
             <input
               type='button'
-              className='btn btn-danger'
+              className='btn btn-danger col p-2 m-2'
               value='Exit parking'
               htmlFor='park'
               onClick={handleClick}
